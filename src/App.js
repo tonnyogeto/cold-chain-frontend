@@ -1,23 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
+import Dashboard from './components/Dashboard';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    // min-h-screen ensures the dark background covers the whole page
+    // bg-slate-950 is that deep "almost black" navy
+    <div className="min-h-screen bg-[#020617] text-slate-200 antialiased font-sans">
+      <Dashboard />
     </div>
   );
 }

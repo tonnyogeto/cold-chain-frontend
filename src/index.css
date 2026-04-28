@@ -1,13 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- Core Page Styles --- */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  /* Darker background slightly increases contrast with white cards */
+  @apply bg-slate-50 text-slate-900; 
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer base {
+  /* ✅ THE "HD" FIX: 
+     Strengthens all default borders globally so they don't fade 
+  */
+  .border {
+    border-width: 1.5px;
+    @apply border-slate-200;
+  }
+  
+  .border-2 {
+    border-width: 2px;
+  }
+}
+
+/* --- Refined Panel Effects --- */
+.glass-panel {
+  /* Swapped white/40 for slate-200/60 for better visibility */
+  @apply bg-white/90 backdrop-blur-md border border-slate-200/60 shadow-2xl;
+}
+
+/* --- Custom Slim Scrollbar for Fleet Sidebar --- */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-slate-100/50 rounded-full;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  /* Darkened thumb for better visibility against light cards */
+  @apply bg-slate-300 rounded-full hover:bg-slate-400 transition-colors;
+}
+
+/* --- Catchy Radar Pulse for Map Markers --- */
+.radar-pulse {
+  background: #2563eb; /* Deeper blue (blue-600) */
+  border: 2px solid white;
+  border-radius: 50%;
+  box-shadow: 0 0 0 rgba(37, 99, 235, 0.4);
+  animation: radar-glow 2s infinite;
+}
+
+@keyframes radar-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7);
+    transform: scale(0.9);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(37, 99, 235, 0);
+    transform: scale(1.1);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+    transform: scale(0.9);
+  }
+}
+
+/* --- Fan Rotation Animation --- */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 1.5s linear infinite; /* Slightly faster for better feedback */
+}
+
+/* --- Gradient Text for Catchy Headings --- */
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-indigo-700;
+}
+
+/* --- Leaflet Popup Styling (Enhanced Contrast) --- */
+.leaflet-popup-content-wrapper {
+  @apply rounded-2xl border-2 border-slate-200 shadow-2xl p-1 !important;
+}
+
+.leaflet-popup-tip {
+  @apply bg-white border-slate-200 !important;
+}
+
+/* --- Decorative: Smooth transitions for card scaling --- */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
 }
